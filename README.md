@@ -5,7 +5,7 @@
 - netty5
 - 高性能,集群策略丰富(),Server端限流,Client Load balance (一致性hash,轮询,随机,低并发优先).
 - 弱依赖Spring,考虑SPI扩展
-- ZK发现服务
+- ZK发现服务,失败重试（Failover）、快速失败（Failfast）
 - 流量控制,压缩
 
 >这将是一个漫长的过程..
