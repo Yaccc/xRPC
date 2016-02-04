@@ -5,8 +5,8 @@
 - netty5
 - 高性能、集群策略丰富、Server端限流、Client Load balance (一致性hash,轮询,随机,低并发优先).
 - 弱依赖Spring,考虑SPI扩展
-- ZK发现服务、失败重试（Failover)、快速失败（Failfast),Hystrix容错([Hystrix](https://github.com/Netflix/Hystrix))
-- 流量控制、压缩、Metrics统计([Metrics](https://github.com/dropwizard/metrics))
+- ZK发现服务、失败重试（Failover)、快速失败（Failfast),[Hystrix](https://github.com/Netflix/Hystrix)容错
+- 流量控制、压缩、[Metrics](https://github.com/dropwizard/metrics)统计
 
 >这将是一个漫长的过程..
 
