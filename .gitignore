@@ -12,8 +12,7 @@
 hs_err_pid*
 *.iml
 .idea
-.project
-classes
-target/*
+
+target
 
 

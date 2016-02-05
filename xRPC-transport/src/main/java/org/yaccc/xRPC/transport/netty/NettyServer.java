@@ -3,7 +3,6 @@ package org.yaccc.xRPC.transport.netty;
 import com.google.common.base.Preconditions;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
-import io.netty.channel.socket.nio.NioSocketChannel;
 import org.slf4j.Logger;
 import org.yaccc.xRPC.transport.Server;
 
@@ -25,12 +24,12 @@ public class NettyServer implements Server {
     @java.beans.ConstructorProperties({"socketAddress", "channelType", "bossGroup", "workerGroup"})
     NettyServer(SocketAddress socketAddress, Class<? extends ServerChannel> channelType, EventLoopGroup bossGroup, EventLoopGroup workerGroup) {
         this.socketAddress = socketAddress;
-        this.channelType =Preconditions.checkNotNull(channelType, NioSocketChannel.class);
+        this.channelType =Preconditions.checkNotNull(channelType,"channel Type must not be null");
         this.bossGroup = bossGroup;
         this.workerGroup = workerGroup;
     }
 
-    public static creater builder() {
+    public static creater creater() {
         return new creater();
     }
 
