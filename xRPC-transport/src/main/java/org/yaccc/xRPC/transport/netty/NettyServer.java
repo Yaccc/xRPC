@@ -50,6 +50,7 @@ public class NettyServer implements Server {
 
         try {
             future.await();
+            log.info("future await connection");
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             log.error("Interrupted waiting for bind");

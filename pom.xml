@@ -11,6 +11,7 @@
     <modules>
         <module>xRPC-common</module>
         <module>xRPC-transport</module>
+        <module>xRPC-serialization</module>
     </modules>
 
 
