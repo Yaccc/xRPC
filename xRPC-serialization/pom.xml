@@ -10,6 +10,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>xRPC-serialization</artifactId>
-
+    <dependencies>
+        <dependency>
+            <groupId>de.ruedigermoeller</groupId>
+            <artifactId>fst</artifactId>
+            <version>2.42</version>
+        </dependency>
+    </dependencies>
 
 </project>

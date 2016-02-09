@@ -2,6 +2,7 @@ package org.yaccc.xRPC.serialization;
 
 
 import java.io.IOException;
+import java.io.InvalidClassException;
 
 /**
  * Created by zhaodong/yaccc(github.com/yaccc)|xRPC on 16/2/8
@@ -30,7 +31,7 @@ public interface Serialization {
          * @param <O>
          * @return binary bytes
          */
-        public <O> byte[] WriteToByte(O obj)throws IOException;
+        public <O> byte[] WriteToByte(O obj)throws IOException,InvalidClassException;
     }
 
     /**

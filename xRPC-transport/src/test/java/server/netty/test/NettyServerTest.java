@@ -4,6 +4,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import org.junit.Test;
+import org.yaccc.xRPC.serialization.fst.FstSerialization;
+import org.yaccc.xRPC.serialization.java.JavaSerialization;
 import org.yaccc.xRPC.transport.netty.NettyServer;
 
 import java.net.InetAddress;
@@ -29,13 +31,18 @@ public class NettyServerTest {
     public static void main(String[] args) throws Exception {
 
         NettyServer nettyServer=NettyServer.creater().bossGroup(new NioEventLoopGroup()).workerGroup(new NioEventLoopGroup())
-                .socketAddress(new InetSocketAddress("127.0.0.1",9000)).channelType(NioServerSocketChannel.class).creat();
+                .socketAddress(new InetSocketAddress("127.0.0.1",9000)).channelType(NioServerSocketChannel.class).serialization(new FstSerialization()).creat();
         nettyServer.start();
-        Thread.sleep(2000);
-        System.out.println("123");
 
-        Socket socket=new Socket("127.0.0.1",9000);
-        socket.getOutputStream().write("xiezhaodong".getBytes());
+//        CodecTest codecTest=new CodecTest();
+//        codecTest.start();
+//        Thread.sleep(2000);
+//        System.out.println("123");
+//
+//        Socket socket=new Socket("127.0.0.1",9000);
+//        socket.getOutputStream().write("xiezhaodong".getBytes());
+//
+//        nettyServer.shutdown();
 
     }
 }

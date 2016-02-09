@@ -1,9 +1,13 @@
 package org.yaccc.xRPC.transport.netty;
 
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
+import io.netty.handler.codec.ReplayingDecoder;
+import org.yaccc.xRPC.transport.protocol.Request;
+import org.yaccc.xRPC.transport.protocol.Response;
+
+import java.io.Serializable;
 import java.net.SocketAddress;
 
 /**
@@ -19,7 +23,16 @@ public class NettyServerHander extends ChannelHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        super.channelRead(ctx, msg);
+        Request request= (Request) msg;
+        System.out.println(request);
+
+        Response response=new Response();
+        response.setRequestId(request.getRequestId());
+        response.setResult(request);
+        response.setStatus(200);
+        ctx.writeAndFlush(response);
+
+
     }
 
     @Override
