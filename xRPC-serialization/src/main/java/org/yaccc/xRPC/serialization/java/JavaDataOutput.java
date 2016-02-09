@@ -21,12 +21,8 @@ public class JavaDataOutput implements Serialization.DataOutput {
     @Override
     public <O> byte[] WriteToByte(O obj) throws IOException,InvalidClassException {
         //is serialization?
-        if(obj  instanceof Serializable){
-            log.info("object are Serializable");
-        }else{
+        if(!(obj  instanceof Serializable))
             throw new InvalidClassException(obj.getClass()+" are should be implement Serializable interface");
-        }
-
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(bos);
         oos.writeObject(obj);

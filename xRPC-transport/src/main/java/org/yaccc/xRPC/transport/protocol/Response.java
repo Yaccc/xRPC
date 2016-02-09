@@ -11,6 +11,7 @@ public class Response implements Serializable {
     private String requestId;
     private int status;
     private Object result;
+    private Throwable throwable;
 
     public Response() {
     }
@@ -27,6 +28,10 @@ public class Response implements Serializable {
         return this.result;
     }
 
+    public Throwable getThrowable() {
+        return this.throwable;
+    }
+
     public void setRequestId(String requestId) {
         this.requestId = requestId;
     }
@@ -37,6 +42,10 @@ public class Response implements Serializable {
 
     public void setResult(Object result) {
         this.result = result;
+    }
+
+    public void setThrowable(Throwable throwable) {
+        this.throwable = throwable;
     }
 
     public boolean equals(Object o) {
@@ -51,6 +60,9 @@ public class Response implements Serializable {
         final Object this$result = this.result;
         final Object other$result = other.result;
         if (this$result == null ? other$result != null : !this$result.equals(other$result)) return false;
+        final Object this$throwable = this.throwable;
+        final Object other$throwable = other.throwable;
+        if (this$throwable == null ? other$throwable != null : !this$throwable.equals(other$throwable)) return false;
         return true;
     }
 
@@ -62,6 +74,8 @@ public class Response implements Serializable {
         result = result * PRIME + this.status;
         final Object $result = this.result;
         result = result * PRIME + ($result == null ? 0 : $result.hashCode());
+        final Object $throwable = this.throwable;
+        result = result * PRIME + ($throwable == null ? 0 : $throwable.hashCode());
         return result;
     }
 
@@ -70,6 +84,6 @@ public class Response implements Serializable {
     }
 
     public String toString() {
-        return "org.yaccc.xRPC.transport.protocol.Response(requestId=" + this.requestId + ", status=" + this.status + ", result=" + this.result + ")";
+        return "org.yaccc.xRPC.transport.protocol.Response(requestId=" + this.requestId + ", status=" + this.status + ", result=" + this.result + ", throwable=" + this.throwable + ")";
     }
 }
