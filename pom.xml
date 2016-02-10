@@ -12,12 +12,17 @@
         <module>xRPC-common</module>
         <module>xRPC-transport</module>
         <module>xRPC-serialization</module>
+        <module>xRPC-spring</module>
+        <module>xRPC-build</module>
     </modules>
 
 
     <properties>
         <java.version>1.7</java.version>
         <maven-complier-pligin-version>3.3</maven-complier-pligin-version>
+        <spring.bom.version>3.2.9.RELEASE</spring.bom.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     </properties>
 
     <dependencyManagement>
@@ -25,17 +30,26 @@
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
+                <version>5.0.0.Alpha1</version>
             </dependency>
             <dependency>
                 <groupId>de.ruedigermoeller</groupId>
                 <artifactId>fst</artifactId>
-
+                <version>2.42</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
 
     </dependencyManagement>
 
     <dependencies>
+
 
         <dependency>
             <groupId>com.esotericsoftware</groupId>
