@@ -2,8 +2,11 @@ package org.yaccc.xRPC.transport.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
+import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.slf4j.Logger;
+import org.yaccc.xRPC.commoms.Utils.CommomUtils;
 import org.yaccc.xRPC.serialization.Serialization;
 import org.yaccc.xRPC.transport.Server;
 import org.yaccc.xRPC.transport.protocol.Request;
@@ -26,12 +29,11 @@ public class NettyServer implements Server {
     private Serialization serialization;
 
     @java.beans.ConstructorProperties({"socketAddress", "channelType", "bossGroup", "workerGroup", "channel", "serialization"})
-    NettyServer(SocketAddress socketAddress, Class<? extends ServerChannel> channelType, EventLoopGroup bossGroup, EventLoopGroup workerGroup, Channel channel, Serialization serialization) {
+    NettyServer(SocketAddress socketAddress, Class<? extends ServerChannel> channelType, EventLoopGroup bossGroup, EventLoopGroup workerGroup,  Serialization serialization) {
         this.socketAddress = socketAddress;
-        this.channelType = channelType;
-        this.bossGroup = bossGroup;
-        this.workerGroup = workerGroup;
-        this.channel = channel;
+        this.channelType = CommomUtils.nullDefault(channelType,NioServerSocketChannel.class);
+        this.bossGroup = CommomUtils.nullDefault(bossGroup,new NioEventLoopGroup());
+        this.workerGroup = CommomUtils.nullDefault(workerGroup,new NioEventLoopGroup());
         this.serialization = serialization;
     }
 
@@ -92,7 +94,6 @@ public class NettyServer implements Server {
         private Class<? extends ServerChannel> channelType;
         private EventLoopGroup bossGroup;
         private EventLoopGroup workerGroup;
-        private Channel channel;
         private Serialization serialization;
 
         creater() {
@@ -118,10 +119,6 @@ public class NettyServer implements Server {
             return this;
         }
 
-        public NettyServer.creater channel(Channel channel) {
-            this.channel = channel;
-            return this;
-        }
 
         public NettyServer.creater serialization(Serialization serialization) {
             this.serialization = serialization;
@@ -129,11 +126,11 @@ public class NettyServer implements Server {
         }
 
         public NettyServer creat() {
-            return new NettyServer(socketAddress, channelType, bossGroup, workerGroup, channel, serialization);
+            return new NettyServer(socketAddress, channelType, bossGroup, workerGroup, serialization);
         }
 
         public String toString() {
-            return "org.yaccc.xRPC.transport.netty.NettyServer.creater(socketAddress=" + this.socketAddress + ", channelType=" + this.channelType + ", bossGroup=" + this.bossGroup + ", workerGroup=" + this.workerGroup + ", channel=" + this.channel + ", serialization=" + this.serialization + ")";
+            return "org.yaccc.xRPC.transport.netty.NettyServer.creater(socketAddress=" + this.socketAddress + ", channelType=" + this.channelType + ", bossGroup=" + this.bossGroup + ", workerGroup=" + this.workerGroup + ", serialization=" + this.serialization + ")";
         }
     }
 }

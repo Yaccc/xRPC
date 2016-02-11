@@ -7,6 +7,7 @@ import org.yaccc.xRPC.serialization.Serialization;
  * Created by zhaodong/yaccc(github.com/yaccc)|xRPC on 16/2/9
  */
 public class FstSerialization implements Serialization {
+    // use ThreadLocal?
     static FSTConfiguration fstConfiguration=FSTConfiguration.createDefaultConfiguration();
     @Override
     public DataInput getDataInputObject() {

@@ -38,9 +38,10 @@ public class CodecTest extends SimpleChannelInboundHandler {
                 ChannelFuture future = bootstrap.connect("127.0.0.1", 9000).sync();
                 Request request=new Request();
                 request.setRequestId("121221");
-                request.setClassName("invoke");
-                request.setParameterTypes(new Class[]{String.class,Integer.class});
-                request.setParameters(new Object[]{"xiezhaodong",67});
+                request.setClassName("server.netty.test.InvokeClass");
+                request.setMethodName("say");
+                request.setParameterTypes(new Class[]{String.class,int.class});
+                request.setParameters(new Object[]{"xiezhaodong",23});
 //                NettyServerHander.person person=new NettyServerHander.person();
 //                person.setName("xiezhaodong");
 //                person.setAge(123);
