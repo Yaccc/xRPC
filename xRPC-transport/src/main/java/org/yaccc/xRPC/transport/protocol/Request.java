@@ -6,6 +6,9 @@ import java.io.Serializable;
  * Created by zhaodong/yaccc(github.com/yaccc)|xRPC on 16/2/9
  */
 public class Request implements Serializable {
+    /**
+     * invoke parameters
+     */
     private String requestId;
     private String className;
     private String methodName;
