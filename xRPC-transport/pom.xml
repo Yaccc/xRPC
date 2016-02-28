@@ -22,6 +22,11 @@
             <artifactId>xRPC-serialization</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.yaccc</groupId>-->
+            <!--<artifactId>xRPC-Spring</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.yaccc</groupId>
             <artifactId>xRPC-common</artifactId>

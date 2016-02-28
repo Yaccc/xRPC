@@ -18,22 +18,25 @@ import java.net.SocketAddress;
 /**
  * Created by zhaodong/yaccc(github.com/yaccc)|xRPC on 16/2/5
  */
-public class NettyServer implements Server {
+public class NettyServer extends Server {
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(NettyServer.class);
-    private final SocketAddress socketAddress;
+    private SocketAddress socketAddress;
     //nio bio channel
-    private final Class<? extends ServerChannel> channelType;
+    private Class<? extends ServerChannel> channelType;
     private EventLoopGroup bossGroup;
     private EventLoopGroup workerGroup;
     private Channel channel;
     private Serialization serialization;
 
+    public NettyServer() {
+    }
+
     @java.beans.ConstructorProperties({"socketAddress", "channelType", "bossGroup", "workerGroup", "channel", "serialization"})
-    NettyServer(SocketAddress socketAddress, Class<? extends ServerChannel> channelType, EventLoopGroup bossGroup, EventLoopGroup workerGroup,  Serialization serialization) {
+    NettyServer(SocketAddress socketAddress, Class<? extends ServerChannel> channelType, EventLoopGroup bossGroup, EventLoopGroup workerGroup, Serialization serialization) {
         this.socketAddress = socketAddress;
-        this.channelType = CommomUtils.nullDefault(channelType,NioServerSocketChannel.class);
-        this.bossGroup = CommomUtils.nullDefault(bossGroup,new NioEventLoopGroup());
-        this.workerGroup = CommomUtils.nullDefault(workerGroup,new NioEventLoopGroup());
+        this.channelType = CommomUtils.nullDefault(channelType, NioServerSocketChannel.class);
+        this.bossGroup = CommomUtils.nullDefault(bossGroup, new NioEventLoopGroup());
+        this.workerGroup = CommomUtils.nullDefault(workerGroup, new NioEventLoopGroup());
         this.serialization = serialization;
     }
 
@@ -43,17 +46,17 @@ public class NettyServer implements Server {
 
 
     @Override
-    public void start() throws Exception{
-        ServerBootstrap sb=new ServerBootstrap().group(bossGroup,workerGroup)
+    public void start() throws Exception {
+        ServerBootstrap sb = new ServerBootstrap().group(bossGroup, workerGroup)
                 .channel(channelType)
-                .option(ChannelOption.SO_BACKLOG,128)
-                .childOption(ChannelOption.SO_KEEPALIVE,true)
+                .option(ChannelOption.SO_BACKLOG, 128)
+                .childOption(ChannelOption.SO_KEEPALIVE, true)
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel channel) throws Exception {
-                        channel.pipeline().addLast("encoder",new RpcEncoder(serialization, Response.class));//codec response
-                        channel.pipeline().addLast("decoder",new RpcDecoder(serialization, Request.class));//decode request
-                        channel.pipeline().addLast("nettyHander",new NettyServerHander());
+                        channel.pipeline().addLast("encoder", new RpcEncoder(serialization, Response.class));//codec response
+                        channel.pipeline().addLast("decoder", new RpcDecoder(serialization, Request.class));//decode request
+                        channel.pipeline().addLast("nettyHander", new NettyServerHander());
                     }
                 });
         ChannelFuture future = sb.bind(socketAddress);
@@ -80,7 +83,7 @@ public class NettyServer implements Server {
             channel.closeFuture().sync();
         } catch (InterruptedException e) {
             log.error(e.getMessage());
-        }finally {
+        } finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
 
