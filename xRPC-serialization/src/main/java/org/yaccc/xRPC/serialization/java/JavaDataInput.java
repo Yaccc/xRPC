@@ -13,11 +13,11 @@ public class JavaDataInput implements Serialization.DataInput {
     @Override
     public <O> O readToObject(byte[] bytes, Class<O> clazz) throws IOException, ClassNotFoundException {
         O o;
-        ByteArrayInputStream byteArrayInputStream=new ByteArrayInputStream(bytes);
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
         //try with resources
-       try( ObjectInputStream objectInputStream=new ObjectInputStream(byteArrayInputStream)){
+        try (ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream)){
             o = (O) objectInputStream.readObject();
-       }
+        }
         return o;
     }
 }
