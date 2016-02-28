@@ -5,9 +5,17 @@
 
 
 
-    <bean id="beanid" class="org.xRPC.spring.test.BeanIOC">
-        <property name="name" value="xiezhaodong"></property>
-    </bean>
+   <bean id="servicePublish" class="org.yaccc.xRPC.spring.config.XRPCServicePublish" destroy-method="destory">
+      <property name="location" value="127.0.0.1:9000"></property>
+      <property name="serviceInterface" value="org.xRPC.spring.test.BeanIOC"></property>
+      <property name="serviceImpl" >
+         <bean id="impl" class="org.xRPC.spring.test.BeanImpl"></bean>
+      </property>
+      <property name="serializable" >
+         <bean id="javaSerialization" class="org.yaccc.xRPC.serialization.java.JavaSerialization"></bean>
+      </property>
+
+   </bean>
 
 
 
