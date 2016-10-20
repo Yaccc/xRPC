@@ -39,7 +39,6 @@ public class RpcDecoder extends ByteToMessageDecoder {
         }
         byte[] data = new byte[dataLength];
         in.readBytes(data);
-        System.out.println(data.length);
         Serialization.DataInput inputObject = serialization.getDataInputObject();
         Object o = inputObject.readToObject(data,clazz);
         out.add(o);
